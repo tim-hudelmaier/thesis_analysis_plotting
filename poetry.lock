@@ -546,7 +546,7 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 type = "git"
 url = "https://github.com/peptideforest/peptideForest"
 reference = "fix/memory_overflow"
-resolved_reference = "3c3c3aff99c4ef2a589836efa2b83858b3ba1d13"
+resolved_reference = "e878a61ae3db5cba0141d9d7d00c929bd9f37e95"
 
 [[package]]
 name = "pillow"
