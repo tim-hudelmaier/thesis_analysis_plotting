@@ -544,7 +544,7 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 
 [package.source]
 type = "git"
-url = "https://github.com/peptideforest/peptideForest.git"
+url = "https://github.com/peptideforest/peptideForest"
 reference = "fix/memory_overflow"
 resolved_reference = "3c3c3aff99c4ef2a589836efa2b83858b3ba1d13"
 
@@ -1005,4 +1005,4 @@ scikit-learn = ["scikit-learn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "db5906f7e3c97dde4f748febd0ca80de5c4ba3bcb7d862d361e4afd7554c20fb"
+content-hash = "3643be90917ed6e43030eaea25a13c279886046887de637fad42f005ce327fd1"
