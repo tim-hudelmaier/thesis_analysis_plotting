@@ -7,7 +7,9 @@ if __name__ == "__main__":
     data_dir = Path("../../data")
 
     df = pd.read_csv(
-        data_dir / "results_data_quantity_analysis.csv", header=0, index_col=0
+        data_dir / "experiment_outputs" / "results_data_quantity_analysis.csv",
+        header=0,
+        index_col=0,
     )
     df["q_cut_log10"] = df["q_cut"].apply(lambda x: -1 * np.log10(x))
     df["q_cut_log10_category"] = pd.cut(df["q_cut_log10"], bins=3, labels=[1, 2, 3])
