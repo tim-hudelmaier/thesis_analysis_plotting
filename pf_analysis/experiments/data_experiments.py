@@ -31,17 +31,16 @@ if __name__ == "__main__":
             memory_limit=None,  # args.m,
             max_mp_count=1,  # args.mp_limit,
         )
-        pf.config = PFConfig(
-            {
-                "n_estimators": {"value": conf[0]},
-                "max_depth": {"value": conf[1]},
-                "q_cut": {"value": conf[2]},
-                "n_spectra": {"value": conf[3]},
-                "n_folds": {"value": 3},
-                "n_train": {"value": 1},
-                "n_jobs": {"value": 7},
-            }
-        )
+        cnf = {
+            "n_estimators": {"value": conf[0]},
+            "max_depth": {"value": conf[1]},
+            "q_cut": {"value": conf[2]},
+            "n_spectra": {"value": conf[3]},
+            "n_folds": {"value": 3},
+            "n_train": {"value": 1},
+            "n_jobs": {"value": 3},
+        }
+        pf.config = PFConfig(cnf)
         pf.initial_config = pf.config.copy()
         pf.boost()
         df = pd.read_csv(output)
@@ -74,4 +73,7 @@ if __name__ == "__main__":
         print(results[-1])
 
     results_df = pd.DataFrame(results)
-    print()
+    results_df.to_csv(
+        DATA_DIR / "experiment_outputs" / "results_data_quantity_analysis.csv",
+        header=True
+    )
