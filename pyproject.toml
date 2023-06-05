@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pf-analysis"
+version = "0.1.0"
+description = ""
+authors = ["tim-hudelmaier <tim.hudelmaier@stud.uni-heidelberg.de>"]
+readme = "README.md"
+packages = [{include = "pf_analysis"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+peptide-forest = {git = "https://github.com/peptideforest/peptideForest.git", rev = "fix/memory_overflow"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
