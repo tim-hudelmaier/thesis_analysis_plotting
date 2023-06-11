@@ -23,10 +23,11 @@ if __name__ == "__main__":
         memory_limit=None,  # args.m,
         max_mp_count=1,  # args.mp_limit,
     )
-    pf.boost(write_results=False, dump_train_test_data=True)
+    pf.boost(write_results=False, dump_train_test_data=True, eval_test_set=False)
+    f = list(pf.spectrum_index.keys())[0]
 
-    tt_data_dir = DATA_DIR / "experiment_outputs" / "tt_data"
-    model_dir = DATA_DIR / "experiment_outputs" / "models"
+    tt_data_dir = DATA_DIR / "experiment_outputs" / "04854_F1_R8_P0109699E13_TMT10" / "tt_data"
+    model_dir = DATA_DIR / "experiment_outputs" / "04854_F1_R8_P0109699E13_TMT10" / "models"
 
     results = []
     for file in tt_data_dir.glob("*.json"):
@@ -38,7 +39,7 @@ if __name__ == "__main__":
             spectra = [s for s in json.load(open(file, "r"))["test_spectra"]]
             pf.engine = peptide_forest.training.get_classifier()
             pf.engine.load_model(engine_path)
-            eval_gen = pf.get_data_chunk(mode="spectrum", reference_spectra=spectra)
+            eval_gen = pf.get_data_chunk(file=f, reference_spectra=spectra)
             df = pf.get_results(gen=eval_gen, use_disk=False, write_output=False)
             n_psms = df["top_target_peptide_forest"].sum()
             results.append((fold, epoch, n_psms))

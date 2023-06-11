@@ -521,7 +521,7 @@ xml = ["lxml (>=4.6.3)"]
 
 [[package]]
 name = "peptide-forest"
-version = "3.0.4.dev133+g2b061b0"
+version = "3.0.4.dev154+ga4a62d8"
 description = "Integrate multiple search engines"
 optional = false
 python-versions = "*"
@@ -544,9 +544,9 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 
 [package.source]
 type = "git"
-url = "https://github.com/peptideforest/peptideForest"
+url = "https://github.com/peptideforest/peptideForest.git"
 reference = "fix/memory_overflow"
-resolved_reference = "4d1b571848bc7972c153ce4b99b876306a210c21"
+resolved_reference = "a4a62d867126eb0a95921f4a0a030e058d81227a"
 
 [[package]]
 name = "pillow"
@@ -947,13 +947,13 @@ requests = ">=2.0,<3.0"
 
 [[package]]
 name = "urllib3"
-version = "2.0.2"
+version = "2.0.3"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "urllib3-2.0.2-py3-none-any.whl", hash = "sha256:d055c2f9d38dc53c808f6fdc8eab7360b6fdbbde02340ed25cfbcd817c62469e"},
-    {file = "urllib3-2.0.2.tar.gz", hash = "sha256:61717a1095d7e155cdb737ac7bb2f4324a858a1e2e6466f6d03ff630ca68d3cc"},
+    {file = "urllib3-2.0.3-py3-none-any.whl", hash = "sha256:48e7fafa40319d358848e1bc6809b208340fafe2096f1725d05d67443d0483d1"},
+    {file = "urllib3-2.0.3.tar.gz", hash = "sha256:bee28b5e56addb8226c96f7f13ac28cb4c301dd5ea8a6ca179c0b9835e032825"},
 ]
 
 [package.extras]
@@ -1005,4 +1005,4 @@ scikit-learn = ["scikit-learn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "3643be90917ed6e43030eaea25a13c279886046887de637fad42f005ce327fd1"
+content-hash = "db5906f7e3c97dde4f748febd0ca80de5c4ba3bcb7d862d361e4afd7554c20fb"

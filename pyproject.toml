@@ -10,7 +10,7 @@ packages = [{include = "pf_analysis"}]
 python = "^3.11"
 plotly = "^5.14.1"
 seaborn = "^0.12.2"
-peptide-forest = {git = "https://github.com/peptideforest/peptideForest", rev = "fix/memory_overflow"}
+peptide-forest = {git = "https://github.com/peptideforest/peptideForest.git", rev = "fix/memory_overflow"}
 
 
 [build-system]
