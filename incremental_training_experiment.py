@@ -70,7 +70,8 @@ def run(config=None):
         max_mp_count=1,  # args.mp_limit,
     )
     if config is not None:
-        pf.config = peptide_forest.pf_config.PFConfig(config)
+        pf.initial_config = peptide_forest.pf_config.PFConfig(config)
+        pf.config = pf.initial_config.copy()
     pf.boost(
         write_results=False,
         dump_train_test_data=True,
