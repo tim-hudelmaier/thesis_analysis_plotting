@@ -12,7 +12,7 @@ import numpy as np
 
 import peptide_forest
 
-DATA_DIR = Path("../../data")
+DATA_DIR = Path("./data")
 PALETTE = [
     "#a6cee3",
     "#1f78b4",
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     dir_path.mkdir(parents=True, exist_ok=True)
     output = dir_path / f"{uuid4()}_output.csv"
     pf = peptide_forest.PeptideForest(
-        config_path="./config_files/config_local_export_models.json",  # args.c
+        config_path="config_files/config_local_export_models.json",  # args.c
         output=output,  # args.o,
         memory_limit=None,  # args.m,
         max_mp_count=1,  # args.mp_limit,
@@ -48,8 +48,8 @@ if __name__ == "__main__":
     f = list(pf.spectrum_index.keys())[0]
     filepath = list(pf.spectrum_index.keys())[0].split("/")[-1].split(".")[0]
 
-    tt_data_dir = DATA_DIR / "experiment_outputs" / filepath / "tt_data"
-    model_dir = DATA_DIR / "experiment_outputs" / filepath / "models"
+    tt_data_dir = DATA_DIR / filepath / "tt_data"
+    model_dir = DATA_DIR / filepath / "models"
 
     results = []
     for file in tt_data_dir.glob("*.json"):
