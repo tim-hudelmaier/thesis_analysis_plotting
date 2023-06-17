@@ -27,6 +27,7 @@ PALETTE = [
 
 
 def download_bucket(bucket_name, destination_directory):
+    print(f"Downloading bucket {bucket_name} to {destination_directory}")
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
 
