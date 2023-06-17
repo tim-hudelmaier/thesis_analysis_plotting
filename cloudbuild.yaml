@@ -4,6 +4,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', 'gcr.io/$PROJECT_ID/pf-analysis' ]
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
   args:
   - 'run'
   - 'deploy'
