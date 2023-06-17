@@ -88,6 +88,7 @@ if __name__ == "__main__":
         .drop(columns=["fold"])
         .reset_index()
     )
+    plt_df.to_csv(dir_path / "results.csv", index=False)
 
     # epochs = plt_df["epoch"].unique()
     # for epoch in epochs:
