@@ -19,7 +19,10 @@ COPY requirements.txt /app/
 # Install project dependencies
 RUN pip install -r requirements.txt
 
+# Set Flask app
+ENV FLASK_APP=app.py
+
 # Copy all the rest of the project files
 COPY . /app/
 
-CMD ["python", "incremental_training_experiment.py"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
