@@ -51,7 +51,7 @@ def access_secret_version(project_id, secret_id, version_id):
     return response.payload.data.decode("UTF-8")
 
 
-def run(config):
+def run(config=None):
     mp.freeze_support()
     mp.set_start_method("fork", force=True)
 
@@ -68,7 +68,8 @@ def run(config):
         memory_limit=None,  # args.m,
         max_mp_count=1,  # args.mp_limit,
     )
-    pf.config = peptide_forest.pf_config.PFConfig(config)
+    if config is not None:
+        pf.config = peptide_forest.pf_config.PFConfig(config)
     pf.boost(
         write_results=False,
         dump_train_test_data=True,
