@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/pf-analysis', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'gcr.io/$PROJECT_ID/pf-analysis' ]
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'pf-analysis'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/pf-analysis'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
