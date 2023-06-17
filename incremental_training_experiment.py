@@ -59,8 +59,7 @@ def run(config):
     dir_path = DATA_DIR / date_str
     dir_path.mkdir(parents=True, exist_ok=True)
 
-    if 'GCP_PROJECT' in os.environ:
-        download_bucket('peptide-forest-raw-data', str(DATA_DIR))
+    download_bucket('peptide-forest-raw-data', str(DATA_DIR))
 
     output = dir_path / f"{uuid4()}_output.csv"
     pf = peptide_forest.PeptideForest(
@@ -123,21 +122,20 @@ def run(config):
     plt_df.to_csv(dir_path / "results.csv", index=False)
 
     # save results to bucket if deployed
-    if 'GCP_PROJECT' in os.environ:
+    upload_blob(
+        "pf-results",
+        str(dir_path / "results.csv"),
+        str(dir_path / "results.csv"),
+    )
+    for file in model_dir.glob("*.json"):
         upload_blob(
             "pf-results",
-            str(dir_path / "results.csv"),
-            str(dir_path / "results.csv"),
+            str(file),
+            str(file),
         )
-        for file in model_dir.glob("*.json"):
-            upload_blob(
-                "pf-results",
-                str(file),
-                str(file),
-            )
-        for file in tt_data_dir.glob("*.json"):
-            upload_blob(
-                "pf-results",
-                str(file),
-                str(file),
-            )
+    for file in tt_data_dir.glob("*.json"):
+        upload_blob(
+            "pf-results",
+            str(file),
+            str(file),
+        )
