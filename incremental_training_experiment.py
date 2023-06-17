@@ -82,30 +82,35 @@ if __name__ == "__main__":
             results.append(df)
 
     plt_df = pd.concat(results)
-    plt_df = plt_df.groupby(["epoch", "q-value threshold", "Engine"]).sum().drop(columns=["fold"]).reset_index()
-
-    epochs = plt_df["epoch"].unique()
-    for epoch in epochs:
-        sns.lineplot(
-            data=plt_df[plt_df["epoch"] == epoch],
-            x="q-value threshold",
-            y="n PSMs",
-            hue="Engine",
-            palette=PALETTE,
-        )
-        plt.show()
-
-    plt.figure(figsize=(10, 6))
-    sns.lineplot(
-        x=plt_df["epoch"],
-        y=plt_df.loc[plt_df["q-value threshold"] == 0.01, "n PSMs"],
-        hue=plt_df["Engine"],
-        marker="o",
-        color="black",
-        palette=PALETTE,
+    plt_df = (
+        plt_df.groupby(["epoch", "q-value threshold", "Engine"])
+        .sum()
+        .drop(columns=["fold"])
+        .reset_index()
     )
 
-    plt.xlabel("Iteration", fontsize=14)
-    plt.ylabel("Total PSMs", fontsize=14)
-    plt.title("Total PSMs per Iteration", fontsize=16)
-    plt.show()
+    # epochs = plt_df["epoch"].unique()
+    # for epoch in epochs:
+    #     sns.lineplot(
+    #         data=plt_df[plt_df["epoch"] == epoch],
+    #         x="q-value threshold",
+    #         y="n PSMs",
+    #         hue="Engine",
+    #         palette=PALETTE,
+    #     )
+    #     plt.show()
+    #
+    # plt.figure(figsize=(10, 6))
+    # sns.lineplot(
+    #     x=plt_df["epoch"],
+    #     y=plt_df.loc[plt_df["q-value threshold"] == 0.01, "n PSMs"],
+    #     hue=plt_df["Engine"],
+    #     marker="o",
+    #     color="black",
+    #     palette=PALETTE,
+    # )
+    #
+    # plt.xlabel("Iteration", fontsize=14)
+    # plt.ylabel("Total PSMs", fontsize=14)
+    # plt.title("Total PSMs per Iteration", fontsize=16)
+    # plt.show()
