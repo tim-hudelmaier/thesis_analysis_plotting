@@ -29,8 +29,8 @@
     "config": {
         "q_cut": {"value": 0.1, "strategy": "_"},
         "n_train": {"value": 5},
-        "n_spectra": {"value": 10000},
-        "n_folds": {"value": 2},
+        "n_spectra": {"value": 20000},
+        "n_folds": {"value": 3},
         "n_estimators": {"value":  50, "strategy":  "+=20"},
         "max_depth": {"value":  3},
         "learning_rate": {},
