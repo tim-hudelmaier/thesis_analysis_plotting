@@ -521,7 +521,7 @@ xml = ["lxml (>=4.6.3)"]
 
 [[package]]
 name = "peptide-forest"
-version = "3.0.4.dev162+g7dec770"
+version = "3.0.4.dev163+gfab4588"
 description = "Integrate multiple search engines"
 optional = false
 python-versions = "*"
@@ -546,7 +546,7 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 type = "git"
 url = "https://github.com/peptideforest/peptideForest.git"
 reference = "fix/memory_overflow"
-resolved_reference = "fab4588cd9ed87b6724772ffcdefd7b9fa6385bf"
+resolved_reference = "cee807c0c70a99199cc7fd6f9a05a538fcdcd433"
 
 [[package]]
 name = "pillow"
