@@ -60,7 +60,7 @@ def run(config=None):
     dir_path = DATA_DIR / date_str
     dir_path.mkdir(parents=True, exist_ok=True)
 
-    download_bucket('peptide-forest-raw-data', str(DATA_DIR))
+    download_bucket("peptide-forest-raw-data", str(DATA_DIR))
 
     output = dir_path / f"{uuid4()}_output.csv"
     pf = peptide_forest.PeptideForest(
@@ -70,6 +70,7 @@ def run(config=None):
         max_mp_count=1,  # args.mp_limit,
     )
     if config is not None:
+        json.dump(config, open(dir_path / "config.json", "w"))
         pf.initial_config = peptide_forest.pf_config.PFConfig(config)
         pf.config = pf.initial_config.copy()
     pf.boost(
@@ -129,6 +130,9 @@ def run(config=None):
         "pf-results",
         str(dir_path / "results.csv"),
         str(dir_path / "results.csv"),
+    )
+    upload_blob(
+        "pf-results", str(dir_path / "config.json"), str(dir_path / "config.json")
     )
     for file in model_dir.glob("*.json"):
         upload_blob(
