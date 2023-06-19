@@ -67,7 +67,6 @@ def run(config=None):
         config_path="config_files/config_local_export_models.json",  # args.c
         output=output,  # args.o,
         memory_limit=None,  # args.m,
-        max_mp_count=1,  # args.mp_limit,
     )
     if config is not None:
         json.dump(config, open(dir_path / "config.json", "w"))
