@@ -52,6 +52,75 @@ def access_secret_version(project_id, secret_id, version_id):
     return response.payload.data.decode("UTF-8")
 
 
+def run_single_epoch(config=None):
+    mp.freeze_support()
+    mp.set_start_method("fork", force=True)
+
+    date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    dir_path = DATA_DIR / date_str
+    dir_path.mkdir(parents=True, exist_ok=True)
+
+    download_bucket("peptide-forest-raw-data", str(DATA_DIR))
+
+    output = dir_path / f"{uuid4()}_output.csv"
+    pf = peptide_forest.PeptideForest(
+        config_path="config_files/config_local_export_models.json",  # args.c
+        output=output,  # args.o,
+        memory_limit=None,  # args.m,
+    )
+    if config is not None:
+        json.dump(config, open(dir_path / "config.json", "w"))
+        pf.initial_config = peptide_forest.pf_config.PFConfig(config)
+        pf.config = pf.initial_config.copy()
+    else:
+        config = json.load(open("config_files/config_local_export_models.json"))
+        json.dump(config["config"], open(dir_path / "config.json", "w"))
+    pf.boost(
+        write_results=True,
+        dump_train_test_data=False,
+        eval_test_set=True,
+        drop_used_spectra=False,
+    )
+    filepath = list(pf.spectrum_index.keys())[0].split("/")[-1].split(".")[0]
+    p = dir_path / filepath / output.name
+    df = pd.read_csv(p)
+
+    q_val_cols = [c for c in df.columns if "q-value_" in c]
+    data = []
+    for x in np.logspace(-4, -1, 100):
+        for engine in q_val_cols:
+            data.append(
+                [
+                    x,
+                    engine.replace("q-value_", ""),
+                    len(df[df[engine] <= x]),
+                    0,
+                ]
+            )
+    df = pd.DataFrame(
+        data, columns=["q-value threshold", "Engine", "n PSMs", "epoch"]
+    )
+
+    df.to_csv(dir_path / "results.csv", index=False)
+
+    # save results to bucket if deployed
+    upload_blob(
+        "pf-results",
+        str(dir_path / "results.csv"),
+        str(dir_path / "results.csv"),
+    )
+    upload_blob(
+        "pf-results", str(dir_path / "config.json"), str(dir_path / "config.json")
+    )
+    model_dir = dir_path / filepath / "models"
+    for file in model_dir.glob("*.json"):
+        upload_blob(
+            "pf-results",
+            str(file),
+            str(file),
+        )
+
+
 def run(config=None):
     mp.freeze_support()
     mp.set_start_method("fork", force=True)

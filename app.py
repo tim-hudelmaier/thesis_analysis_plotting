@@ -8,3 +8,10 @@ def run_experiment():
     config = request.get_json(force=True)
     ite.run(config)
     return jsonify([{'result': 'success'}])
+
+
+@app.route('/run_single_epoch', methods=['Post'])
+def run_single_epoch():
+    config = request.get_json(force=True)
+    ite.run_single_epoch(config)
+    return jsonify([{'result': 'success'}])
